@@ -11,13 +11,13 @@ import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 public class GridFlatFileItemReader extends FlatFileItemReader<InputGrid> {
 
 	public GridFlatFileItemReader() {
-		this.setResource(new FileSystemResource(""));
+		this.setResource(new FileSystemResource("grilles.csv"));
 		this.setLinesToSkip(1);
 		this.setLineMapper(new DefaultLineMapper() {
 			{				
 				setLineTokenizer(new DelimitedLineTokenizer() {
 					{
-						setNames(new String[] { "id", "firstName", "lastName" });
+						setNames(new String[] { "code", "libelle", "vue", "type", "cal", "totalpts", "pts" });
 					}
 				});
 				// Set values in Employee class
