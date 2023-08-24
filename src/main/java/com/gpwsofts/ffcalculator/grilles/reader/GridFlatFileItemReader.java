@@ -5,9 +5,11 @@ import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 
+@Component
 public class GridFlatFileItemReader extends FlatFileItemReader<InputGrid> {
 
 	public GridFlatFileItemReader() {
