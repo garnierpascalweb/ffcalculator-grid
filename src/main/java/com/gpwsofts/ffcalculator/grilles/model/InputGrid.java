@@ -1,5 +1,11 @@
 package com.gpwsofts.ffcalculator.grilles.model;
 
+/**
+ * Input Grid
+ * Classe à l'image du fichier CSV en entree
+ * @author Pascal
+ *
+ */
 public class InputGrid {
 	/**
 	 * champ code
