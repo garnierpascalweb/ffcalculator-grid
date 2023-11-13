@@ -29,6 +29,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 	@Override
 	public OutputGrid process(InputGrid inputGrid) throws Exception {		
 		String inputCode = null;
+		String inputLogo = null;
 		String inputLibelle = null;
 		String inputCal = null;
 		String inputTotalPts = null;
@@ -43,6 +44,9 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			//code
 			inputCode = inputGrid.getCode();
 			outputGrid.setCode(inputCode);
+			// logo
+			inputLogo = inputGrid.getLogo();
+			outputGrid.setLogo(inputLogo);
 			// libelle
 			inputLibelle = inputGrid.getLibelle();
 			outputGrid.setLibelle(inputLibelle);

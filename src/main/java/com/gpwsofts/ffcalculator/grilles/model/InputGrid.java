@@ -12,6 +12,10 @@ public class InputGrid {
 	 */
 	public String code = null;
 	/**
+	 * champ logo
+	 */
+	public String logo = null;
+	/**
 	 * champ libelle
 	 */
 	public String libelle = null;
@@ -47,6 +51,13 @@ public class InputGrid {
 	}
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+	
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	public String getVue() {
 		return vue;

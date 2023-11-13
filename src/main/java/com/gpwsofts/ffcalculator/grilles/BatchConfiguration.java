@@ -66,7 +66,7 @@ public class BatchConfiguration {
 	public LineMapper<InputGrid> lineMapper() {
 		DefaultLineMapper<InputGrid> lineMapper = new DefaultLineMapper<InputGrid>();
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames(new String[] { "code", "libelle", "vue", "type", "cal", "totalpts", "pts" });
+		lineTokenizer.setNames(new String[] { "code", "logo", "libelle", "vue", "type", "cal", "totalpts", "pts" });
 		lineTokenizer.setDelimiter(";");
 		BeanWrapperFieldSetMapper<InputGrid> fieldSetMapper = new BeanWrapperFieldSetMapper<InputGrid>();
 		fieldSetMapper.setTargetType(InputGrid.class);

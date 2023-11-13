@@ -14,6 +14,10 @@ public class OutputGrid {
 	 */
 	public String code = null;
 	/**
+	 * logo
+	 */
+	public String logo = null;
+	/**
 	 * libelle
 	 */
 	public String libelle = null;
@@ -50,6 +54,13 @@ public class OutputGrid {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}	
+	
+	public String getLogo() {
+		return logo;
+	}
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
 	public List<String> getVues() {
 		return vues;
 	}
