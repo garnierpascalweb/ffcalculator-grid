@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
 import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
+import com.gpwsofts.ffcalculator.grilles.processor.GridItemProcessor;
 
 /**
  * Validation de l'input
@@ -20,7 +23,7 @@ import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
  */
 @Component
 public class InputGridValidator implements Validator<InputGrid> {
-
+	private static Logger logger = LoggerFactory.getLogger(InputGridValidator.class);
 	@Override
 	public void validate(InputGrid inputGrid) throws ValidationException {
 		String code = inputGrid.getCode();
@@ -30,13 +33,15 @@ public class InputGridValidator implements Validator<InputGrid> {
 		// somme des points		
 		int sum = Stream.of(inputPts.split(",", -1)).mapToInt(Integer::valueOf).sum();
 		// comparaison de totalPts avec sum qui doit etre egal
-		if (totalPts != sum){			
+		if (totalPts != sum){	
+			logger.error("<{}> - le nombre total de points <{}> est different de la somme des points", code, totalPts, sum);
 			throw new ValidationException(" code <"+ code + "> - grille de points incorrect : totalPts = <" + totalPts + "> - sum = <" + sum + ">");
 		}
 		List<Integer> listPts =  Stream.of(inputPts.split(",", -1)).mapToInt(Integer::valueOf).boxed().collect(Collectors.toList());
 		List<Integer> sortedPts = listPts.stream().mapToInt(Integer::valueOf).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		boolean sorted = sortedPts.equals(listPts);
 		if (!sorted){
+			logger.error("<{}> - la grille des points nest pas triée dans l'ordre decroissant", code);
 			throw new ValidationException(" code <"+ code + "> - grille de points non triee : <" + listPts + "> <" + sortedPts + ">");
 		}
 	}

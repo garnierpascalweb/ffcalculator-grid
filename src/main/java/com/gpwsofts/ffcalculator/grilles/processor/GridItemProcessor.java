@@ -3,6 +3,8 @@ package com.gpwsofts.ffcalculator.grilles.processor;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +22,7 @@ import com.gpwsofts.ffcalculator.grilles.validator.InputGridValidator;
  */
 @Component
 public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
-
+	private static Logger logger = LoggerFactory.getLogger(GridItemProcessor.class);
 	/**
 	 * Validation du contenu du fichier en entrée
 	 */
@@ -37,7 +39,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 		String inputVue = null;
 		String inputPts = null;		
 		OutputGrid outputGrid = null;
-		try{		
+		try{					
 			validator.validate(inputGrid);
 			outputGrid = new OutputGrid();
 			// code;libelle;vue;type;cal;totalpts;pts
