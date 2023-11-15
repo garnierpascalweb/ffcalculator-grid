@@ -35,6 +35,10 @@ public class BatchConfiguration {
 	private StepBuilderFactory stepBuilderFactory;
 	@Autowired
 	private GridItemProcessor gridItemProcessor;
+	/**
+	 * @since 1.0.0 dossier de livraison
+	 */
+	private static final String OUTPUT_FOLDER = "dist";
 
 	@Value("${file.input}")
 	private String fileInput;
@@ -45,7 +49,7 @@ public class BatchConfiguration {
 	@Bean
 	public Job job() {
 		Step step = stepBuilderFactory.get("GridStep1").<InputGrid, OutputGrid>chunk(100)
-				.reader(reader())
+				.reader(itemReader())
 				.processor(gridItemProcessor)
 				.writer(itemWriter())
 				.build();
@@ -53,7 +57,7 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public ItemReader<InputGrid> reader() {
+	public ItemReader<InputGrid> itemReader() {
 		FlatFileItemReader<InputGrid> itemReader = new FlatFileItemReader<InputGrid>();
 		itemReader.setName("InputGridItemReader");
 		itemReader.setLineMapper(lineMapper());
@@ -78,8 +82,8 @@ public class BatchConfiguration {
 	@Bean
 	public ItemWriter<OutputGrid> itemWriter() {
 		JsonFileItemWriter<OutputGrid> itemWriter = new JsonFileItemWriterBuilder<OutputGrid>()
-				.jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())
-				.resource(new FileSystemResource("target/test-outputs/"+fileOutput))
+				.jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())				
+				.resource(new FileSystemResource(new StringBuilder().append(OUTPUT_FOLDER).append("/").append(fileOutput).toString()))				
 				.name("OutputGridItemWriter")
 				.build();
 		return itemWriter;

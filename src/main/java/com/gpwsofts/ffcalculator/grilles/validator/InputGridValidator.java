@@ -12,7 +12,6 @@ import org.springframework.batch.item.validator.Validator;
 import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
-import com.gpwsofts.ffcalculator.grilles.processor.GridItemProcessor;
 
 /**
  * Validation de l'input

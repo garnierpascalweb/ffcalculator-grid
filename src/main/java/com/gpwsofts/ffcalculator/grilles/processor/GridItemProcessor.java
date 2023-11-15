@@ -45,31 +45,39 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			// code;libelle;vue;type;cal;totalpts;pts
 			//code
 			inputCode = inputGrid.getCode();
+			logger.info("<{}> - traitement de la classe de course", inputCode);
 			outputGrid.setCode(inputCode);
 			// logo
 			inputLogo = inputGrid.getLogo();
 			outputGrid.setLogo(inputLogo);
+			logger.trace("<{}> - logo", outputGrid.getLogo());
 			// libelle
 			inputLibelle = inputGrid.getLibelle();
 			outputGrid.setLibelle(inputLibelle);
+			logger.trace("<{}> - libelle", outputGrid.getLibelle());
 			// vue
 			inputVue = inputGrid.getVue();			
 			outputGrid.setVues(Stream.of(inputVue.split(",", -1)).collect(Collectors.toList()));
+			logger.trace("<{}> - vues", outputGrid.getVues());
 			// type
 			inputType = inputGrid.getType();
 			outputGrid.setType(inputType);
+			logger.trace("<{}> - type", outputGrid.getType());
 			// cal
 			inputCal = inputGrid.getCal();
-			outputGrid.setCal(inputCal);			
+			outputGrid.setCal(inputCal);		
+			logger.trace("<{}> - cal", outputGrid.getCal());
 			// totalPts
 			inputTotalPts = inputGrid.getTotalpts();
 			outputGrid.setTotalpts(Integer.parseInt(inputTotalPts));
+			logger.trace("<{}> - totalpts", outputGrid.getTotalpts());
 			// pts et maxpos
 			inputPts = inputGrid.getPts();
 			outputGrid.setPts(Stream.of(inputPts.split(",", -1)).map(Integer::parseInt).collect(Collectors.toList()));
 			outputGrid.setMaxPos(inputPts.length());
+			logger.trace("<{}> - maxpos", outputGrid.getMaxPos());
 		} finally {
-			
+			logger.info("<{}> - fin traitement de la classe de course", inputCode);
 		}		
 		return outputGrid;
 	}
