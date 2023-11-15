@@ -58,13 +58,14 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			outputGrid.setType(inputType);
 			// cal
 			inputCal = inputGrid.getCal();
-			outputGrid.setCal(inputCal);
+			outputGrid.setCal(inputCal);			
 			// totalPts
 			inputTotalPts = inputGrid.getTotalpts();
 			outputGrid.setTotalpts(Integer.parseInt(inputTotalPts));
-			// pts
+			// pts et maxpos
 			inputPts = inputGrid.getPts();
-			outputGrid.setPts(Stream.of(inputPts.split(",", -1)).map(Integer::parseInt).collect(Collectors.toList()));				
+			outputGrid.setPts(Stream.of(inputPts.split(",", -1)).map(Integer::parseInt).collect(Collectors.toList()));
+			outputGrid.setMaxPos(inputPts.length());
 		} finally {
 			
 		}		

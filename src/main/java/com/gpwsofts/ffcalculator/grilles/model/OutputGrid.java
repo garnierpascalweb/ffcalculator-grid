@@ -10,35 +10,39 @@ import java.util.List;
  */
 public class OutputGrid {
 	/**
-	 * code
+	 * code : la classe de course
 	 */
 	public String code = null;
 	/**
-	 * logo
+	 * logo : un abrege du libelle
 	 */
 	public String logo = null;
 	/**
-	 * libelle
+	 * libelle : le libellé long 
 	 */
 	public String libelle = null;
 	/**
-	 * vues
+	 * vues : la liste des vues elligibles
 	 */
 	public List<String> vues = null;
 	/**
-	 * type
+	 * type : le type de course (en ligne, etape, general)
 	 */
 	public String type = null;
 	/**
-	 * cal
+	 * cal : le calendrier concerné (reg, nat, uci)
 	 */
 	public String cal = null;
 	/**
-	 * totalPts
+	 * maxpos : le nombre de places dans les points
+	 */
+	public int maxPos;
+	/**
+	 * totalPts : le nombre total de points distribués
 	 */
 	public int totalpts = 0;
 	/**
-	 * pts
+	 * pts : un tableau de la liste des points distribues
 	 */
 	public List<Integer> pts = null;
 	
@@ -78,6 +82,13 @@ public class OutputGrid {
 	}
 	public void setCal(String cal) {
 		this.cal = cal;
+	}
+	
+	public int getMaxPos() {
+		return maxPos;
+	}
+	public void setMaxPos(int maxPos) {
+		this.maxPos = maxPos;
 	}
 	public int getTotalpts() {
 		return totalpts;
