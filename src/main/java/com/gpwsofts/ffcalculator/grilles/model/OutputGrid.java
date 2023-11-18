@@ -2,6 +2,8 @@ package com.gpwsofts.ffcalculator.grilles.model;
 
 import java.util.List;
 
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 /**
  * OutputGrid
  * Classe a l'image du fichier json en sortie
@@ -15,11 +17,11 @@ public class OutputGrid {
 	public String code = null;
 	/**
 	 * logo : un abrege du libelle
-	 */
+	 */	
 	public String logo = null;
 	/**
 	 * libelle : le libellé long 
-	 */
+	 */	
 	public String libelle = null;
 	/**
 	 * vues : la liste des vues elligibles
