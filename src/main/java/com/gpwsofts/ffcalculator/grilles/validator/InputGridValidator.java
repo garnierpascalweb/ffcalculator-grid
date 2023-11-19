@@ -29,19 +29,31 @@ public class InputGridValidator implements Validator<InputGrid> {
 		String inputTotalPts = inputGrid.getTotalpts();
 		String inputPts = inputGrid.getPts();
 		int totalPts = Integer.parseInt(inputTotalPts);
+		//int maxPos = inputGrid.get
 		// somme des points		
 		int sum = Stream.of(inputPts.split(",", -1)).mapToInt(Integer::valueOf).sum();
 		// comparaison de totalPts avec sum qui doit etre egal
 		if (totalPts != sum){	
 			logger.error("<{}> - le nombre total de points <{}> est different de la somme des points", code, totalPts, sum);
 			throw new ValidationException(" code <"+ code + "> - grille de points incorrect : totalPts = <" + totalPts + "> - sum = <" + sum + ">");
-		}
+		}		
 		List<Integer> listPts =  Stream.of(inputPts.split(",", -1)).mapToInt(Integer::valueOf).boxed().collect(Collectors.toList());
+		// verification de la logique des pts decroissants		
 		List<Integer> sortedPts = listPts.stream().mapToInt(Integer::valueOf).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		boolean sorted = sortedPts.equals(listPts);
 		if (!sorted){
 			logger.error("<{}> - la grille des points nest pas triée dans l'ordre decroissant", code);
 			throw new ValidationException(" code <"+ code + "> - grille de points non triee : <" + listPts + "> <" + sortedPts + ">");
+		}
+		// On dirait que le nombre des places recompensees est toujours un miltiple de 5
+		int maxPos = listPts.size();
+		if (maxPos % 5 != 0){
+			if (code.equals("3.58E")){
+				logger.warn("<{}> - la taille de la liste nest pas un multiple de 5 mais cest normal : <{}>", code, maxPos);
+			} else {
+			logger.error("<{}> - la taille de la liste nest pas un multiple de 5 : <{}>", code, maxPos);
+			throw new ValidationException(" code <"+ code + "> - la taille de la liste nest pas un multiple de 5 : " + maxPos);
+			}
 		}
 	}
 

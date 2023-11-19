@@ -74,7 +74,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			// pts et maxpos
 			inputPts = inputGrid.getPts();
 			outputGrid.setPts(Stream.of(inputPts.split(",", -1)).map(Integer::parseInt).collect(Collectors.toList()));
-			outputGrid.setMaxPos(inputPts.length());
+			outputGrid.setMaxPos(outputGrid.getPts().size());
 			logger.trace("<{}> - maxpos", outputGrid.getMaxPos());
 		} finally {
 			logger.info("<{}> - fin traitement de la classe de course", inputCode);
