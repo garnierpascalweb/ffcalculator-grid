@@ -103,5 +103,9 @@ public class OutputGrid {
 	}
 	public void setPts(List<Integer> pts) {
 		this.pts = pts;
-	}			
+	}	
+	
+	public String toXml() {
+		return "toto";
+	}
 }
