@@ -2,15 +2,13 @@ package com.gpwsofts.ffcalculator.grilles.model;
 
 import java.util.List;
 
-import com.thoughtworks.xstream.annotations.XStreamOmitField;
-
 /**
  * OutputGrid
  * Classe a l'image du fichier json en sortie
  * @author Pascal
  *
  */
-public class OutputGrid {
+public class OutputGrid implements Comparable {
 	/**
 	 * code : la classe de course
 	 */
@@ -103,9 +101,9 @@ public class OutputGrid {
 	}
 	public void setPts(List<Integer> pts) {
 		this.pts = pts;
-	}	
-	
-	public String toXml() {
-		return "toto";
 	}
+	@Override
+	public int compareTo(Object other) {
+		return code.compareTo(((OutputGrid)other).getCode());
+	}	
 }

@@ -17,13 +17,10 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.batch.item.file.transform.PassThroughLineAggregator;
 import org.springframework.batch.item.json.JacksonJsonObjectMarshaller;
 import org.springframework.batch.item.json.JsonFileItemWriter;
 import org.springframework.batch.item.json.builder.JsonFileItemWriterBuilder;
 import org.springframework.batch.item.support.CompositeItemWriter;
-import org.springframework.batch.item.xml.StaxEventItemWriter;
-import org.springframework.batch.item.xml.builder.StaxEventItemWriterBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +32,6 @@ import org.springframework.oxm.xstream.XStreamMarshaller;
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 import com.gpwsofts.ffcalculator.grilles.model.OutputGrid;
 import com.gpwsofts.ffcalculator.grilles.processor.GridItemProcessor;
-import com.gpwsofts.ffcalculator.grilles.writer.ArrayStringItemWriter;
 
 @Configuration
 @EnableBatchProcessing
@@ -98,7 +94,7 @@ public class BatchConfiguration {
 		CompositeItemWriter<OutputGrid> compositeItemWriter = new CompositeItemWriter<OutputGrid>();
         List<ItemWriter<? super OutputGrid>> delegates = new ArrayList<>();
         delegates.add(itemWriter());
-        delegates.add(arrayStringItemWriter());
+        //delegates.add(arrayStringItemWriter());
         // delegates.add(arrayStringItemWriter());
         compositeItemWriter.setDelegates(delegates);
         return compositeItemWriter;
@@ -128,14 +124,7 @@ public class BatchConfiguration {
 	}
 	*/
 	
-	@Bean
-	public ItemWriter<OutputGrid> arrayStringItemWriter(){
-		ArrayStringItemWriter<OutputGrid> arrayItemWriter = new ArrayStringItemWriter<OutputGrid>();
-		arrayItemWriter.setEncoding("UTF-8");
-		arrayItemWriter.setResource(new FileSystemResource(new StringBuilder().append(OUTPUT_FOLDER).append("/").append(fileOutputXml).toString()))		;
-		arrayItemWriter.setLineAggregator(new PassThroughLineAggregator());
-		return arrayItemWriter;
-	}
+
 	
 	@Bean
 	public XStreamMarshaller  recordsMarshaller() {
