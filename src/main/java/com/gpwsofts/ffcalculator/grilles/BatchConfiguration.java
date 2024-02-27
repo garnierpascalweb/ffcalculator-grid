@@ -1,9 +1,7 @@
 package com.gpwsofts.ffcalculator.grilles;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -27,7 +25,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.oxm.xstream.XStreamMarshaller;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 import com.gpwsofts.ffcalculator.grilles.model.OutputGrid;
@@ -80,7 +77,7 @@ public class BatchConfiguration {
 	public LineMapper<InputGrid> lineMapper() {
 		DefaultLineMapper<InputGrid> lineMapper = new DefaultLineMapper<InputGrid>();
 		DelimitedLineTokenizer lineTokenizer = new DelimitedLineTokenizer();
-		lineTokenizer.setNames(new String[] { "code", "logo", "libelle", "vue", "type", "cal", "totalpts", "pts" });
+		lineTokenizer.setNames(new String[] { "code", "priority", "logo", "libelle", "vue", "type", "cal", "totalpts", "pts" });
 		lineTokenizer.setDelimiter(";");
 		BeanWrapperFieldSetMapper<InputGrid> fieldSetMapper = new BeanWrapperFieldSetMapper<InputGrid>();
 		fieldSetMapper.setTargetType(InputGrid.class);
@@ -93,9 +90,7 @@ public class BatchConfiguration {
 	public CompositeItemWriter<OutputGrid> compositeItemWriter(){
 		CompositeItemWriter<OutputGrid> compositeItemWriter = new CompositeItemWriter<OutputGrid>();
         List<ItemWriter<? super OutputGrid>> delegates = new ArrayList<>();
-        delegates.add(itemWriter());
-        //delegates.add(arrayStringItemWriter());
-        // delegates.add(arrayStringItemWriter());
+        delegates.add(itemWriter());     
         compositeItemWriter.setDelegates(delegates);
         return compositeItemWriter;
 	}
@@ -105,33 +100,9 @@ public class BatchConfiguration {
 		JsonFileItemWriter<OutputGrid> itemWriter = new JsonFileItemWriterBuilder<OutputGrid>()
 				.jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())				
 				.resource(new FileSystemResource(new StringBuilder().append(OUTPUT_FOLDER).append("/").append(fileOutputJson).toString()))				
-				.name("JsonOutputGridItemWriter")
+				.name("JsonOutputGridItemWriter")				
 				.build();
 		return itemWriter;
 	}
 	
-	/*
-	@Bean
-	public ItemWriter<OutputGrid> xmlItemWriter() {
-		StaxEventItemWriter<OutputGrid> itemWriter = new StaxEventItemWriterBuilder<OutputGrid>()
-				.name("XmlOutputGridItemWriter")
-				.marshaller(recordsMarshaller())
-				.resource(new FileSystemResource(new StringBuilder().append(OUTPUT_FOLDER).append("/").append(fileOutputXml).toString()))		
-				.rootTagName("records")
-				.overwriteOutput(true)
-				.build();
-		return itemWriter;
-	}
-	*/
-	
-
-	
-	@Bean
-	public XStreamMarshaller  recordsMarshaller() {
-		Map<String, Class> aliases = new HashMap<>();	
-		aliases.put("code", String.class);
-		XStreamMarshaller marshaller = new XStreamMarshaller();
-		marshaller.setAliases(aliases);
-		return marshaller;
-	}
 }

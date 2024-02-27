@@ -31,6 +31,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 	@Override
 	public OutputGrid process(InputGrid inputGrid) throws Exception {		
 		String inputCode = null;
+		String inputPriority;
 		String inputLogo = null;
 		String inputLibelle = null;
 		String inputCal = null;
@@ -47,6 +48,10 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			inputCode = inputGrid.getCode();
 			logger.info("<{}> - traitement de la classe de course", inputCode);
 			outputGrid.setCode(inputCode);
+			// priority
+			inputPriority = inputGrid.getPriority();
+			outputGrid.setPriority(Integer.parseInt(inputPriority));
+			logger.trace("<{}> - priority", outputGrid.getPriority());
 			// logo
 			inputLogo = inputGrid.getLogo();
 			outputGrid.setLogo(inputLogo);

@@ -14,6 +14,10 @@ public class OutputGrid implements Comparable {
 	 */
 	public String code = null;
 	/**
+	 * priority : la priorité pour affichage
+	 */
+	public int priority;
+	/**
 	 * logo : un abrege du libelle
 	 */	
 	public String logo = null;
@@ -51,6 +55,13 @@ public class OutputGrid implements Comparable {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	public int getPriority() {
+		return priority;
+	}
+	public void setPriority(int priority) {
+		this.priority = priority;
 	}
 	public String getLibelle() {
 		return libelle;

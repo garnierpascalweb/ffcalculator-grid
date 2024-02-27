@@ -12,6 +12,10 @@ public class InputGrid {
 	 */
 	public String code = null;
 	/**
+	 * champ priority
+	 */
+	public String priority;
+	/**
 	 * champ logo
 	 */
 	public String logo = null;
@@ -45,6 +49,13 @@ public class InputGrid {
 	}
 	public void setCode(String code) {
 		this.code = code;
+	}	
+	
+	public String getPriority() {
+		return priority;
+	}
+	public void setPriority(String priority) {
+		this.priority = priority;
 	}
 	public String getLibelle() {
 		return libelle;
