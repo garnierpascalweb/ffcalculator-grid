@@ -1,7 +1,9 @@
 package com.gpwsofts.ffcalculator.grilles.validator;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +47,12 @@ public class InputGridValidator implements Validator<InputGrid> {
 			logger.error("<{}> - la grille des points nest pas triée dans l'ordre decroissant", code);
 			throw new ValidationException(" code <"+ code + "> - grille de points non triee : <" + listPts + "> <" + sortedPts + ">");
 		}
+		// verification qu'on ne retrouve pas plusieurs fois la meme valeur de points
+		// set etant unique, si al longueur du Set et plus courte que la longueur de la liste, ya un probleme
+		Set<Integer> setPts = new HashSet<Integer>();
+		setPts.addAll(listPts);
+		if (listPts.size() != setPts.size())
+			throw new ValidationException(" code <"+ code + "> - doublon de valeur probable dans la liste : <" + listPts + ">");
 		// On dirait que le nombre des places recompensees est toujours un miltiple de 5
 		int maxPos = listPts.size();
 		if (maxPos % 5 != 0){
