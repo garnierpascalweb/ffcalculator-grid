@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 import com.gpwsofts.ffcalculator.grilles.model.OutputGrid;
-import com.gpwsofts.ffcalculator.grilles.properties.MaxPosProperties;
 import com.gpwsofts.ffcalculator.grilles.validator.InputGridValidator;
 
 /**

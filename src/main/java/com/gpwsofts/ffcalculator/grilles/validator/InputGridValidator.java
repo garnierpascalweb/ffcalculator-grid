@@ -69,7 +69,7 @@ public class InputGridValidator implements Validator<InputGrid> {
 			throw new ValidationException(" code <"+ code + "> - la taille de la liste nest pas un multiple de 5 : " + maxPos);
 			}
 		}
-		// verification que maxPos est cohérent avec
+		// verification que maxPos est cohérent avec maxpos.properties
 		final String propName = code.replace(".", "-");
 		final String maxPosValue = maxpos.getMaxpos().getProperty(propName);
 		if (maxPosValue != null){
@@ -77,7 +77,7 @@ public class InputGridValidator implements Validator<InputGrid> {
 			if (maxPosValueInt != maxPos)
 				throw new ValidationException(" code <"+ code + "> - maxPos est different entre le fichier source csv " + maxPos + " et le fichier de propriété maxpos.properties " + maxPosValueInt);
 		} else {
-			logger.error("<{}> - maxpos n'a pas pu etre verifiee (absent du fichier de propriete maxpos.properties)", code, maxPos);
+			logger.warn("<{}> - maxpos n'a pas pu etre verifiee (absent du fichier de propriete maxpos.properties)", code, maxPos);
 		}
 	}
 
