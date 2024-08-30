@@ -11,9 +11,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.validator.ValidationException;
 import org.springframework.batch.item.validator.Validator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
+import com.gpwsofts.ffcalculator.grilles.properties.MaxPosProperties;
 
 /**
  * Validation de l'input
@@ -25,6 +27,10 @@ import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 @Component
 public class InputGridValidator implements Validator<InputGrid> {
 	private static Logger logger = LoggerFactory.getLogger(InputGridValidator.class);
+	
+	@Autowired
+	MaxPosProperties maxpos;
+	
 	@Override
 	public void validate(InputGrid inputGrid) throws ValidationException {
 		String code = inputGrid.getCode();
@@ -62,6 +68,16 @@ public class InputGridValidator implements Validator<InputGrid> {
 			logger.error("<{}> - la taille de la liste nest pas un multiple de 5 : <{}>", code, maxPos);
 			throw new ValidationException(" code <"+ code + "> - la taille de la liste nest pas un multiple de 5 : " + maxPos);
 			}
+		}
+		// verification que maxPos est cohérent avec
+		final String propName = code.replace(".", "-");
+		final String maxPosValue = maxpos.getMaxpos().getProperty(propName);
+		if (maxPosValue != null){
+			int maxPosValueInt = Integer.parseInt(maxPosValue);
+			if (maxPosValueInt != maxPos)
+				throw new ValidationException(" code <"+ code + "> - maxPos est different entre le fichier source csv " + maxPos + " et le fichier de propriété maxpos.properties " + maxPosValueInt);
+		} else {
+			logger.error("<{}> - maxpos n'a pas pu etre verifiee (absent du fichier de propriete maxpos.properties)", code, maxPos);
 		}
 	}
 

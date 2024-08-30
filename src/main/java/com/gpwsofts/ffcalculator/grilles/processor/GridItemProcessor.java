@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.gpwsofts.ffcalculator.grilles.model.InputGrid;
 import com.gpwsofts.ffcalculator.grilles.model.OutputGrid;
+import com.gpwsofts.ffcalculator.grilles.properties.MaxPosProperties;
 import com.gpwsofts.ffcalculator.grilles.validator.InputGridValidator;
 
 /**
@@ -23,6 +24,7 @@ import com.gpwsofts.ffcalculator.grilles.validator.InputGridValidator;
 @Component
 public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 	private static Logger logger = LoggerFactory.getLogger(GridItemProcessor.class);
+		
 	/**
 	 * Validation du contenu du fichier en entrée
 	 */
@@ -40,7 +42,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 		String inputVue = null;
 		String inputPts = null;		
 		OutputGrid outputGrid = null;
-		try{					
+		try{								
 			validator.validate(inputGrid);
 			outputGrid = new OutputGrid();
 			// code;libelle;vue;type;cal;totalpts;pts
