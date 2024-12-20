@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.gpwsofts.ffcalculator</groupId>
 	<artifactId>grilles</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>grilles</name>
 	<description>Spring Batch - Grilles FFCalculator</description>
 	<properties>
