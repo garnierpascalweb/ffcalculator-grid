@@ -57,10 +57,13 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			inputLogo = inputGrid.getLogo();
 			outputGrid.setLogo(inputLogo);
 			logger.trace("<{}> - logo", outputGrid.getLogo());
-			// libelle
+			// shortLabel
 			inputLibelle = inputGrid.getLibelle();
-			outputGrid.setLibelle(inputLibelle);
-			logger.trace("<{}> - libelle", outputGrid.getLibelle());
+			outputGrid.setShortLabel(inputLibelle);
+			logger.trace("<{}> - shortLabel", outputGrid.getShortLabel());
+			// depuis 1.1.0 : ajout d'un nouveau champ longLabel au format libelle (code)
+			// longLabel (depuis 1.1.0)
+			final String longLabel = new StringBuilder().append(inputLibelle).append(" (").append(inputCode).append(")").toString();
 			// vue
 			inputVue = inputGrid.getVue();			
 			outputGrid.setVues(Stream.of(inputVue.split(",", -1)).collect(Collectors.toList()));
