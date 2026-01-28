@@ -64,6 +64,7 @@ public class GridItemProcessor implements ItemProcessor<InputGrid,OutputGrid> {
 			// depuis 1.1.0 : ajout d'un nouveau champ longLabel au format libelle (code)
 			// longLabel (depuis 1.1.0)
 			final String longLabel = new StringBuilder().append(inputLibelle).append(" (").append(inputCode).append(")").toString();
+			outputGrid.setLongLabel(longLabel);
 			// vue
 			inputVue = inputGrid.getVue();			
 			outputGrid.setVues(Stream.of(inputVue.split(",", -1)).collect(Collectors.toList()));
