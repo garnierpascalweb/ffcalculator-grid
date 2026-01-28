@@ -10,11 +10,11 @@ import java.util.List;
  */
 public class OutputGrid implements Comparable {
 	/**
-	 * code : la classe de course
+	 * code : la classe de course (exemple 1.25.1)
 	 */
 	public String code = null;
 	/**
-	 * priority : la priorité pour affichage
+	 * priority : la priorité pour affichage (exemple 104)
 	 */
 	public int priority;
 	/**
@@ -22,9 +22,13 @@ public class OutputGrid implements Comparable {
 	 */	
 	public String logo = null;
 	/**
-	 * libelle : le libellé long 
+	 * shortLabel : le label court (exemple : Open 3 Access)
 	 */	
-	public String libelle = null;
+	public String shortLabel = null;
+	/**
+	 * longLabel : le label long (exemple : Open 3 Access (1.25.1))
+	 */
+	public String longLabel = null;
 	/**
 	 * vues : la liste des vues elligibles
 	 */
@@ -63,12 +67,6 @@ public class OutputGrid implements Comparable {
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
-	public String getLibelle() {
-		return libelle;
-	}
-	public void setLibelle(String libelle) {
-		this.libelle = libelle;
-	}	
 	
 	public String getLogo() {
 		return logo;
@@ -112,6 +110,19 @@ public class OutputGrid implements Comparable {
 	}
 	public void setPts(List<Integer> pts) {
 		this.pts = pts;
+	}
+	
+	public String getShortLabel() {
+		return shortLabel;
+	}
+	public void setShortLabel(String shortLabel) {
+		this.shortLabel = shortLabel;
+	}
+	public String getLongLabel() {
+		return longLabel;
+	}
+	public void setLongLabel(String longLabel) {
+		this.longLabel = longLabel;
 	}
 	@Override
 	public int compareTo(Object other) {
